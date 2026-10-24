@@ -56,3 +56,37 @@ function showPackingProgress(quantity) {
 showPackingProgress(3);
 showPackingProgress(1);
 showPackingProgress(0);
+
+// task-05
+function createOrderSummary(
+  productName,
+  price,
+  quantity,
+  isPremium,
+  deliveryType
+) {
+  const subtotal = calculateSubtotal(price, quantity);
+  if (subtotal <= 0) {
+    return 'Замовлення неможливо оформити';
+  }
+  const discount = calculateDiscount(subtotal, isPremium);
+  const deliveryPrice = getDeliveryPrice(deliveryType);
+  if (deliveryPrice < 0) {
+    return 'Невідомий спосіб доставки';
+  }
+  const finalPrice = subtotal - discount + deliveryPrice;
+  showPackingProgress(quantity);
+  return `Товар: ${productName}. Кількість: ${quantity}. До сплати: ${finalPrice} грн.`;
+}
+
+console.log(createOrderSummary('Навушники', 250, 4, true, 'standard'));
+// Товар: Навушники. Кількість: 4. До сплати: 980 грн.
+
+console.log(createOrderSummary('Клавіатура', 800, 1, true, 'pickup'));
+// Товар: Клавіатура. Кількість: 1. До сплати: 760 грн.
+
+console.log(createOrderSummary('Миша', 500, 0, false, 'express'));
+// Замовлення неможливо оформити
+
+console.log(createOrderSummary('Монітор', 5000, 1, false, 'drone'));
+// Невідомий спосіб доставки
