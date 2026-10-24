@@ -42,3 +42,17 @@ console.log(getDeliveryPrice('pickup')); // 0
 console.log(getDeliveryPrice('standard')); // 80
 console.log(getDeliveryPrice('express')); // 150
 console.log(getDeliveryPrice('drone')); // -1
+
+// task-04
+function showPackingProgress(quantity) {
+  if (quantity <= 0) {
+    return console.log('Немає товарів для пакування');
+  } else {
+    for (let i = 1; i <= quantity; i += 1) {
+      console.log(`Пакуємо товар ${i} з ${quantity}`);
+    }
+  }
+}
+showPackingProgress(3);
+showPackingProgress(1);
+showPackingProgress(0);
